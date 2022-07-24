@@ -1,6 +1,24 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: 'Comic Sans MS';
+}
+
+.app {
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  color: #fff;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: unset;
+  cursor: pointer;
 }
