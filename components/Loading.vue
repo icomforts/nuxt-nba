@@ -39,7 +39,7 @@ export default {
   padding-top: 200px;
   font-size: 30px;
   z-index: 999;
-  
+
   .basketball {
     position: relative;
     top: 50px;

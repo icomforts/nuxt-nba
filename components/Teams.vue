@@ -7,9 +7,7 @@
         :to="`team/${team.profile.code}`"
         class="team"
       >
-        <img
-          :src="`https://tw.global.nba.com/media/img/teams/00/logos/${team.profile.abbr}_logo.svg`"
-        />
+        <img :src="teamLogoImg(team.profile.abbr)" />
       </nuxt-link>
     </div>
   </div>
@@ -23,14 +21,17 @@ export default {
     }
   },
   async fetch() {
-    await this.test()
+    await this.getAllTeams()
   },
   methods: {
-    async test() {
+    async getAllTeams() {
       const res = await nbaApi.getAllTeams()
       this.teams = res.payload.listGroups.reduce((acc, key) => {
         return [...acc, ...key.teams]
       }, [])
+    },
+    teamLogoImg(abbr) {
+      return `https://tw.global.nba.com/media/img/teams/00/logos/${abbr}_logo.svg`
     },
   },
 }
@@ -50,6 +51,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   .teams {
     display: flex;
     justify-content: center;
@@ -60,23 +62,28 @@ export default {
     padding: 1rem;
     gap: 1rem;
     overflow-y: auto;
+
     .team {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 15%;
       cursor: pointer;
+
       &:hover {
         transform: scale(1.1);
         transition: all 0.2s ease-in-out;
       }
+
       img {
         width: 108px;
         height: auto;
       }
+
       @media (max-width: 800px) {
         width: 30%;
       }
+
       @media (max-width: 500px) {
         width: 40%;
       }

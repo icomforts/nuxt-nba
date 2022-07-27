@@ -240,7 +240,7 @@ export default {
     const res = await nbaApi.getPlayer({ player: playerId })
     this.playerData = res.payload
     this.rows = res.payload.player.stats.regularSeasonStat.playerTeams.map(
-      (item) => this.flstObj(item)
+      (item) => this.flatObj(item)
     )
     const awardsRes = await nbaApi.getPlayerAwards({
       playerId: this.playerData.player.playerProfile.playerId,
@@ -261,12 +261,12 @@ export default {
       })
       return awardsObj
     },
-    flstObj(obj) {
+    flatObj(obj) {
       let newObj = {}
       Object.keys(obj).forEach((key) => {
         if (typeof obj[key] === 'object') {
           if (obj[key] !== null)
-            newObj = { ...newObj, ...this.flstObj(obj[key]) }
+            newObj = { ...newObj, ...this.flatObj(obj[key]) }
         } else {
           newObj[key] = obj[key]
         }
@@ -283,15 +283,18 @@ export default {
     padding: 24px 80px;
     position: relative;
     width: 100%;
+
     .playerInfoHolder {
       max-width: 550px;
       padding-bottom: 70px;
       padding-top: 100px;
       position: relative;
       width: 100%;
+
       .playerInfoHeader {
         align-items: baseline;
         display: flex;
+
         .playerInfoNumber {
           background: #fdb927;
           color: #232323;
@@ -301,6 +304,7 @@ export default {
           margin-top: 12px;
           padding: 2px 6px;
         }
+
         .playerInfoPosition {
           color: silver;
           font-size: 14px;
@@ -309,6 +313,7 @@ export default {
           margin: 0 0 0 8px;
         }
       }
+
       .playerName {
         display: flex;
         flex-direction: column;
@@ -319,14 +324,17 @@ export default {
         margin: 16px 0 32px 0;
         text-transform: uppercase;
       }
+
       .posterInline {
         display: none;
       }
+
       .playerAwards {
         display: flex;
         flex-direction: column;
       }
     }
+
     .posterBackground {
       background-position: 90% top;
       background-repeat: no-repeat;
@@ -338,28 +346,35 @@ export default {
       top: 0;
       width: 100%;
     }
+
     @media (max-width: 800px) {
       padding: 40px;
-      .posterBackground{
+
+      .posterBackground {
         display: none;
       }
+
       .playerInfoHolder {
-        .playerName{
+        .playerName {
           font-size: 16vw;
         }
+
         .posterInline {
           display: block;
-          img{
+
+          img {
             max-width: 100%;
             height: auto;
           }
         }
-        .playerAwards{
+
+        .playerAwards {
           margin-top: 2rem;
         }
       }
     }
   }
+
   .info {
     margin-top: 16%;
     padding: 40px 80px 24px;
@@ -372,6 +387,7 @@ export default {
       margin: auto;
       max-width: 560px;
       width: calc(100% / 3);
+
       .infoList {
         font-size: 12px;
         font-weight: 500;
@@ -380,6 +396,7 @@ export default {
         list-style: none;
         padding: 0;
         text-transform: uppercase;
+
         li {
           border-bottom: 1px solid #303030;
           display: flex;
@@ -390,16 +407,19 @@ export default {
         }
       }
     }
+
     .playerStats {
       display: flex;
       flex-wrap: wrap;
       padding: 0 3% 0 12%;
       width: calc(100% / 3 * 2);
+
       .playerStatsTable {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         width: 100%;
+
         .playerStatsTableTitle {
           border-bottom: 1px solid #303030;
           color: #fff;
@@ -412,16 +432,19 @@ export default {
           text-align: left;
           text-transform: uppercase;
         }
+
         .playerStatsTableItem {
           flex: 0 0 25%;
           margin: 16px 0;
           padding: 8px 0;
           text-align: center;
+
           p {
             font-size: 4vw;
             font-weight: 400;
             line-height: 1;
           }
+
           span {
             color: hsla(0, 0%, 87%, 0.7);
             font-size: 16px;
@@ -432,19 +455,23 @@ export default {
         }
       }
     }
+
     @media (max-width: 800px) {
       flex-direction: column;
       align-items: center;
       gap: 1rem;
       padding: 20px;
       margin-top: 0;
+
       .playerInfoTable {
         width: 100%;
         max-width: unset;
       }
+
       .playerStats {
         width: 100%;
         padding: 0;
+
         .playerStatsTable {
           .playerStatsTableTitle {
             padding: 4px 0;
@@ -453,10 +480,12 @@ export default {
       }
     }
   }
+
   .stats {
     margin-top: 5rem;
     padding: 1rem;
   }
+
   ::v-deep .vgt-wrap * {
     background-color: transparent;
   }

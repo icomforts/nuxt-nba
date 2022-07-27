@@ -10,7 +10,7 @@
         :to="`/player/${player.profile.code}`"
         class="card"
         :style="{
-          'background-image': `url(https://cdn.nba.com/headshots/nba/latest/1040x760/${player.profile.playerId}.png)`,
+          'background-image': `${playerPhoto(player.profile.playerId)}`,
           display: `${!player.profile.jerseyNo ? 'none' : null}`,
         }"
       >
@@ -69,6 +69,11 @@ export default {
     const res = await nbaApi.getTeamPlayers({ team: teamId })
     return { players: res.payload.players, teamInfo: res.payload.profile }
   },
+  methods: {
+    playerPhoto(playerId) {
+      return `url(https://cdn.nba.com/headshots/nba/latest/1040x760/${playerId}.png)`
+    },
+  },
 }
 </script>
 
@@ -78,10 +83,12 @@ export default {
   margin: 5rem 0 3rem 0;
   padding: 1rem;
   word-break: break-word;
+
   @media (max-width: 800px) {
     margin: 5rem 0 1rem 0;
   }
 }
+
 .teamRoster {
   display: flex;
   flex-wrap: wrap;
@@ -104,22 +111,26 @@ export default {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
+
     &:hover {
       background-position: center center;
       background-repeat: no-repeat;
       background-size: 100% 100%;
       background-position-x: 173px;
       background-color: #fff;
+
       .border {
         .info * {
           color: #000;
         }
+
         .stats {
           opacity: 0.5;
           color: #000;
         }
       }
     }
+
     .border {
       height: 253px;
       width: 346px;
@@ -131,17 +142,20 @@ export default {
       &:hover {
         border: 1px solid #fff;
       }
+
       .stats {
         opacity: 0;
         transition: opacity 0.3s;
         padding: 4px;
         padding-left: 16px;
+
         .item {
           span:first-child {
             font-weight: bolder;
           }
         }
       }
+
       .info {
         display: flex;
         align-items: center;
@@ -153,6 +167,7 @@ export default {
           font-size: 3rem;
           position: relative;
           margin-right: 16px;
+
           &::before {
             content: '';
             position: absolute;
@@ -164,6 +179,7 @@ export default {
             height: 3rem;
           }
         }
+
         .name {
           display: flex;
           flex-direction: column;
