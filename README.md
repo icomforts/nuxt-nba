@@ -1,4 +1,4 @@
-# NBA 球員資訊網站
+# NBA 球員資訊網站-持續更新中
 
 ## 專案架構
 
@@ -25,4 +25,4 @@ $ npm run generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
-
+DEMO: https://nuxt-nba.vercel.app/
